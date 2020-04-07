@@ -1,4 +1,4 @@
-package javageeksforgeeks.leetcode.leetcode;
+package javageeksforgeeks.leetcode;
 
 public class DeepestLeavesSum {
 
