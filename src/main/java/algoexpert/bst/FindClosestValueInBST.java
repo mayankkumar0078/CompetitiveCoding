@@ -31,48 +31,50 @@ public class FindClosestValueInBST {
 
 
   public static void main(String[] args) {
-    BST root = new BST(10);
+    BST root = new BST(100);
     BST L1 = new BST(5);
-    BST R1 = new BST(15);
+    BST R1 = new BST(502);
     root.left= L1;
     root.right= R1;
-    BST L21 = new BST(2);
-    BST L22 = new BST(5);
-    L1.left=L21;
-    L1.right =L22;
-    BST L31 = new BST(1);
-    L21.left=L31;
-    BST R21 = new BST(13);
-    R1.left=R21;
-    BST R32 = new BST(22);
-    R1.right=R32;
-    BST R31 =new BST(14);
-    R21.left=R31;
-    System.out.println(findClosestValueInBst(root,12));
+    //BST L21 = new BST(2);
+    //BST L22 = new BST(5);
+    //L1.left=L21;
+    //L1.right =L22;
+    R1.left = new BST(204);
+    R1.right= new BST(55000);
+    R1.left.left= new BST(203);
+    R1.left.right= new BST(205);
+    R1.right.left= new BST(1001);
+    R1.right.left.right= new BST(4500);
+    System.out.println(findClosestValueInBst(root,2000));
   }
 
   static int closest;
-  static int diff= Integer.MAX_VALUE;
   public static int findClosestValueInBst(BST tree, int target) {
-
+    closest = tree.value;
     doFindClosestValueInBst(tree,target);
     return closest;
   }
 
   public static void doFindClosestValueInBst(BST tree, int target) {
+
+    if (tree == null) {
+      return;
+    }
     int val = tree.value;
     int currentDiff = Math.abs(val- target);
-
-
-    if(currentDiff < diff) {
-      diff = currentDiff;
+    int closestDiff = Math.abs(closest-target);
+    if(currentDiff < closestDiff) {
       closest = val;
     }
 
-    if(target < tree.value && tree.left!=null) {
+    if(target < tree.value) {
       doFindClosestValueInBst(tree.left,target);
-    } else  if(target > tree.value && tree.right!=null) {
+    } else  if(target > tree.value) {
       doFindClosestValueInBst(tree.right,target);
+    }else{
+      closest = val;
+      return;
     }
   }
 
